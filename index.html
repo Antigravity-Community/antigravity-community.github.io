@@ -3,251 +3,634 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>جامعه آنتی گرویتی | راهکارها و ابزارهای Google Antigravity</title>
+  <title>جامعه آنتی گرویتی ایران | Google Antigravity Community</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: rgba(19, 27, 46, 0.7);
-      --card-border: rgba(255, 255, 255, 0.1);
+      --bg: #07090e;
+      --bg-surface: #0e131f;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(56, 189, 248, 0.35);
       --accent: #38bdf8;
-      --accent-grad: linear-gradient(135deg, #38bdf8, #818cf8);
+      --accent-rgb: 56, 189, 248;
+      --accent-secondary: #818cf8;
+      --accent-gold: #fbbf24;
+      --accent-emerald: #34d399;
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --success: #34d399;
-      --warning: #fbbf24;
+      --text-sub: #64748b;
+      --code-bg: #05070b;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       background-color: var(--bg);
       color: var(--text);
-      font-family: 'Vazirmatn', sans-serif;
+      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% -10%, rgba(56, 189, 248, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 10% 40%, rgba(129, 140, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(52, 211, 153, 0.06) 0%, transparent 45%);
+    }
+
+    /* Top Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      padding: 2rem 1rem;
-      background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 60%);
     }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .brand-logo .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-tg {
+      background: #0088cc;
+      color: #fff;
+    }
+    .nav-btn-tg:hover { background: #0099e6; transform: translateY(-1px); }
+
+    .nav-btn-gh {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f1f5f9;
+      border: 1px solid var(--card-border);
+    }
+    .nav-btn-gh:hover { background: rgba(255, 255, 255, 0.15); }
+
+    /* Hero Section */
     .container {
-      max-width: 950px;
-      width: 100%;
-      margin: auto;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem 1.5rem;
     }
-    .header-section {
+
+    .hero {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 2.5rem 1rem 3.5rem 1rem;
     }
-    .badge {
+
+    .badge-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 1.1rem;
       border-radius: 9999px;
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.25);
       color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 700;
       margin-bottom: 1.5rem;
+      animation: pulseGlow 3s infinite ease-in-out;
     }
-    h1 {
-      font-size: 2.4rem;
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+      50% { box-shadow: 0 0 22px rgba(56, 189, 248, 0.45); }
+    }
+
+    .hero h1 {
+      font-size: 3rem;
       font-weight: 900;
-      line-height: 1.25;
-      margin-bottom: 1rem;
-      background: var(--accent-grad);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #818cf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    p.lead {
+
+    .hero p.lead {
       color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto;
+      font-size: 1.2rem;
+      max-width: 720px;
+      margin: 0 auto 2.25rem auto;
+      font-weight: 400;
     }
-    .section-title {
-      font-size: 1.5rem;
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-telegram {
+      background: linear-gradient(135deg, #0088cc, #0077b5);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0, 136, 204, 0.35);
+    }
+    .btn-telegram:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 136, 204, 0.5);
+    }
+
+    .btn-group {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      backdrop-filter: blur(8px);
+    }
+    .btn-group:hover {
+      background: rgba(56, 189, 248, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Section Headings */
+    .section-head {
+      margin: 3.5rem 0 1.75rem 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.6rem;
       font-weight: 800;
-      margin: 2.5rem 0 1.25rem 0;
       color: #fff;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
+
+    .section-head p {
+      color: var(--text-sub);
+      font-size: 0.9rem;
+    }
+
+    /* Card Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
     }
+
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 1.75rem;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(14px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      overflow: hidden;
     }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
     .card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
+      border-color: var(--card-hover-border);
       transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
     }
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
+
+    .card:hover::before { opacity: 1; }
+
+    .card-top {
+      margin-bottom: 1.5rem;
     }
-    .card-tag {
+
+    .card-header-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .pill-tag {
       font-size: 0.75rem;
       font-weight: 700;
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 0.5rem;
     }
-    .tag-solved { background: rgba(52, 211, 153, 0.15); color: var(--success); border: 1px solid rgba(52, 211, 153, 0.3); }
-    .tag-guide { background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); }
+
+    .tag-tool { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+    .tag-monitor { background: rgba(251, 191, 36, 0.15); color: var(--accent-gold); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .tag-mcp { background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .tag-bridge { background: rgba(129, 140, 248, 0.15); color: var(--accent-secondary); border: 1px solid rgba(129, 140, 248, 0.3); }
+
     .card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
       color: #fff;
     }
+
     .card p {
       color: var(--text-muted);
       font-size: 0.95rem;
+      line-height: 1.65;
       margin-bottom: 1.25rem;
     }
-    .code-box {
-      background: rgba(0, 0, 0, 0.4);
+
+    .card-feature-list {
+      list-style: none;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-feature-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .code-snippet {
+      background: var(--code-bg);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 0.6rem 0.8rem;
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: #38bdf8;
       direction: ltr;
       text-align: left;
-      margin-bottom: 1rem;
-      word-break: break-all;
+      margin-bottom: 1.25rem;
+      overflow-x: auto;
+      white-space: nowrap;
     }
-    .btn {
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .btn-card {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.75rem 1.25rem;
-      border-radius: 12px;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-card-gh {
+      background: #1f2937;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-card-gh:hover {
+      background: #374151;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-card-tg {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent);
+    }
+    .btn-card-tg:hover {
+      background: rgba(56, 189, 248, 0.18);
+    }
+
+    /* Community Hub Banner */
+    .community-banner {
+      margin-top: 4.5rem;
+      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(14, 19, 31, 0.95) 75%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 24px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    .community-banner h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .community-banner p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 2rem auto;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      background: rgba(7, 9, 14, 0.95);
+    }
+
+    footer a {
+      color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.2s;
     }
-    .btn-primary { background: #0088cc; color: #fff; }
-    .btn-primary:hover { background: #0099e6; }
-    .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--accent); }
-    .btn-outline:hover { background: rgba(56, 189, 248, 0.15); }
-    .btn-github { background: #24292e; border: 1px solid rgba(255,255,255,0.15); color: #fff; }
-    .btn-github:hover { background: #2f363d; }
-    .community-box {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      margin: 3rem 0;
-    }
-    footer {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 2rem;
-      text-align: center;
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .grid { grid-template-columns: 1fr; }
+      .nav-container { flex-direction: column; gap: 0.75rem; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Sticky Navbar -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">🚀</div>
+        <span>Antigravity Iran</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://t.me/antigravity_iran" target="_blank" class="nav-btn nav-btn-tg">
+          📢 کانال تلگرام
+        </a>
+        <a href="https://t.me/+Kq4Yl6UvpqEwMDJk" target="_blank" class="nav-btn nav-btn-gh">
+          💬 گروه گفت‌وگو
+        </a>
+        <a href="https://github.com/Antigravity-Community" target="_blank" class="nav-btn nav-btn-gh">
+          ⭐ گیت‌هاب
+        </a>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="header-section">
-      <div class="badge">🚀 Google Antigravity Persian Community</div>
-      <h1>مرجع راهکارها و ابزارهای آنتی‌گرویتی</h1>
+
+    <!-- Hero Header -->
+    <header class="hero">
+      <div class="badge-pill">
+        ⚡️ Official Google Antigravity Persian Community
+      </div>
+      <h1>جامعه توسعه‌دهندگان Google Antigravity</h1>
       <p class="lead">
-        حل مشکلات متداول توسعه‌دهندگان، ابزارهای کاربردی متن‌باز و بهینه‌سازی مصرف هوش مصنوعی
+        مرجع ابزارهای متن‌باز، راهکارهای حل چالش‌های روز، مانیتورینگ سهمیه و بهینه‌سازی مصرف هوش مصنوعی برای توسعه‌دهندگان ایرانی.
       </p>
-    </div>
-
-    <!-- Solutions Hub -->
-    <h2 class="section-title">🛠 راهکارها و ابزارهای حل مشکلات</h2>
-    <div class="grid">
-      
-      <!-- Card 1: Account Switcher -->
-      <div class="card">
-        <div>
-          <div class="card-icon">⚡️</div>
-          <span class="card-tag tag-solved">حل شده با ابزار</span>
-          <h3>۱. سوییچ سریع اکانت‌ها</h3>
-          <p>تغییر آنی بین بی‌شمار اکانت گوگل بدون نیاز به لاگ‌اوت و لاگین مجدد با امنیت ۱۰۰٪ آفلاین (Keychain و Credential Manager).</p>
-        </div>
-        <a href="https://github.com/m4tinbeigi-official/antigravity-account-switcher" target="_blank" class="btn btn-github">
-          ⭐ دانلود Switcher در گیت‌هاب
-        </a>
-      </div>
-
-      <!-- Card 2: MCP Codebase (Quota & Token Optimization) -->
-      <div class="card">
-        <div>
-          <div class="card-icon">🧠</div>
-          <span class="card-tag tag-guide">بهینه‌سازی مصرف</span>
-          <h3>۲. مدیریت سهمیه با MCP Codebase</h3>
-          <p>جلوگیری از اتمام سهمیه و ریت‌لیمیت‌ها با ایندکس هوشمند سورس‌کد و کاهش بیش از ۸۰٪ مصرف توکن‌های ارسالی به مدل‌ها.</p>
-          <div class="code-box">npx @modelcontextprotocol/server-filesystem</div>
-        </div>
-        <a href="https://t.me/antigravity_iran" target="_blank" class="btn btn-outline">
-          📖 مشاهده آموزش در کانال
-        </a>
-      </div>
-
-      <!-- Card 3: API Bridging -->
-      <div class="card">
-        <div>
-          <div class="card-icon">🔌</div>
-          <span class="card-tag tag-guide">اتصال به سایر ابزارها</span>
-          <h3>۳. تبدیل سشن به API استاندارد</h3>
-          <p>استفاده از قدرت مدل‌های آنتی‌گرویتی در ابزارهای خارجی مثل Claude Code، Cursor، OpenCode و VS Code به عنوان API استاندارد.</p>
-          <div class="code-box">gcli2api / antigravity2api</div>
-        </div>
-        <a href="https://t.me/antigravity_iran" target="_blank" class="btn btn-outline">
-          🔌 راهنمای بریج API در کانال
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Community Channels -->
-    <div class="community-box">
-      <h2 style="font-size: 1.6rem; margin-bottom: 0.75rem; color: #fff;">💬 به جامعه تخصصی آنتی‌گرویتی بپیوندید</h2>
-      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem auto;">
-        برای رفع اشکال، دریافت ابزارهای جدید و گفت‌وگوی مستقیم با توسعه‌دهندگان، در کانال و گروه تلگرام عضو شوید.
-      </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="https://t.me/antigravity_iran" target="_blank" class="btn btn-primary">
+      <div class="hero-actions">
+        <a href="https://t.me/antigravity_iran" target="_blank" class="btn-main btn-telegram">
           📢 عضویت در کانال (@antigravity_iran)
         </a>
-        <a href="https://t.me/+Kq4Yl6UvpqEwMDJk" target="_blank" class="btn btn-outline">
+        <a href="https://t.me/+Kq4Yl6UvpqEwMDJk" target="_blank" class="btn-main btn-group">
           💬 درخواست عضویت در گروه گفت‌وگو
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Solutions Section -->
+    <div class="section-head">
+      <h2>🛠 پروژه‌ها و راهکارهای حل چالش‌ها</h2>
+      <p>ابزارهای توسعه‌یافته توسط جامعه برای رفع محدودیت‌ها</p>
+    </div>
+
+    <div class="grid">
+
+      <!-- Card 1: Account Switcher -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-header-line">
+            <div class="card-icon-badge">⚡️</div>
+            <span class="pill-tag tag-tool">ابزار نیتیو (حل شده)</span>
+          </div>
+          <h3>Antigravity Account Switcher</h3>
+          <p>
+            تغییر آنی و زیر ۳ ثانیه‌ای بین بی‌شمار اکانت گوگل بدون نیاز به لاگ‌اوت و ورود مجدد. امنیت ۱۰۰٪ آفلاین و محلی.
+          </p>
+          <ul class="card-feature-list">
+            <li>پشتیبانی از چیپ‌های Apple Silicon و Intel در مک</li>
+            <li>نسخه نیتیو ویندوز ۱۰ و ۱۱ بدون نیاز به پیش‌نیاز</li>
+            <li>ذخیره‌سازی امن در Keychain و Credential Manager</li>
+          </ul>
+          <div class="code-snippet">git clone .../antigravity-account-switcher</div>
+        </div>
+        <div class="card-actions">
+          <a href="https://github.com/m4tinbeigi-official/antigravity-account-switcher" target="_blank" class="btn-card btn-card-gh">
+            ⭐ سورس‌کد و دانلود در گیت‌هاب
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Quota Monitor -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-header-line">
+            <div class="card-icon-badge">📊</div>
+            <span class="pill-tag tag-monitor">مانیتورینگ لایو</span>
+          </div>
+          <h3>Antigravity Quota Monitor</h3>
+          <p>
+            نمایش زنده و درون‌برنامه‌ای سهمیه باقی‌مانده و زمان دقیق ریست شدن مدل‌ها (Claude 4.6 و Gemini 3.8) درست مانند Claude Code.
+          </p>
+          <ul class="card-feature-list">
+            <li>تزریق نشانگر سهمیه مستقیم روی سلکتور مدل‌ها</li>
+            <li>پایداری در برابر آپدیت‌های رسمی (Update-Proof)</li>
+            <li>محاسبه مصرف هفتگی (Weekly Quota) با دیمن سبک</li>
+          </ul>
+          <div class="code-snippet">python3 sync_daemon.py</div>
+        </div>
+        <div class="card-actions">
+          <a href="https://github.com/m4tinbeigi-official/antigravity-quota-monitor" target="_blank" class="btn-card btn-card-gh">
+            ⭐ سورس‌کد و راهنما در گیت‌هاب
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: MCP Codebase -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-header-line">
+            <div class="card-icon-badge">🧠</div>
+            <span class="pill-tag tag-mcp">کاهش ۸۰٪ مصرف توکن</span>
+          </div>
+          <h3>مدیریت سهمیه با MCP Codebase</h3>
+          <p>
+            جلوگیری از اتمام سهمیه و ریت‌لیمیت‌ها با ایندکس ساختاری سورس‌کد پروژه و ارسال هوشمند فقط بخش‌های مرتبط به مدل.
+          </p>
+          <ul class="card-feature-list">
+            <li>تبدیل کدهای پروژه به درخت ساختاری (AST Graph)</li>
+            <li>کاهش بیش از ۸۰٪ مصرف توکن در هر پرامپت</li>
+            <li>جلوگیری از پر شدن ریت‌لیمیت‌های روزانه و ساعتی</li>
+          </ul>
+          <div class="code-snippet">npx @modelcontextprotocol/server-filesystem</div>
+        </div>
+        <div class="card-actions">
+          <a href="https://github.com/colbymchenry/codegraph" target="_blank" class="btn-card btn-card-gh">
+            ⭐ بررسی پروژه CodeGraph
+          </a>
+          <a href="https://t.me/antigravity_iran" target="_blank" class="btn-card btn-card-tg">
+            📖 آموزش کانفیگ در کانال تلگرام
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4: API Bridging -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-header-line">
+            <div class="card-icon-badge">🔌</div>
+            <span class="pill-tag tag-bridge">بریج به سایر ابزارها</span>
+          </div>
+          <h3>تبدیل به API استاندارد</h3>
+          <p>
+            استفاده از قدرت مدل‌های آنتی‌گرویتی در ابزارهای خارجی مانند Cursor، Claude Code، OpenCode، VS Code یا CLI ترمینال.
+          </p>
+          <ul class="card-feature-list">
+            <li>ایجاد اندپوینت سازگار با OpenAI / Anthropic</li>
+            <li>بدون نیاز به پرداخت دلاری برای کلیدهای API مجزا</li>
+            <li>پشتیبانی از استریم و اجرای ابری یا لوکال</li>
+          </ul>
+          <div class="code-snippet">gcli2api --port 8000 / antigravity2api</div>
+        </div>
+        <div class="card-actions">
+          <a href="https://github.com/su-kaka/gcli2api" target="_blank" class="btn-card btn-card-gh">
+            ⭐ ابزار gcli2api در گیت‌هاب
+          </a>
+          <a href="https://t.me/antigravity_iran" target="_blank" class="btn-card btn-card-tg">
+            🔌 راهنمای راه‌اندازی در کانال
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Community CTA Box -->
+    <div class="community-banner">
+      <h2>🚀 به جمع توسعه‌دهندگان آنتی‌گرویتی بپیوندید</h2>
+      <p>
+        هدف ما ساخت کامل‌ترین اکوسیستم ابزارها و رفع موانع فنی برای برنامه‌نویسان است. در کانال و گروه تلگرام با ما در ارتباط باشید.
+      </p>
+      <div class="hero-actions">
+        <a href="https://t.me/antigravity_iran" target="_blank" class="btn-main btn-telegram">
+          📢 عضویت در کانال رسمی (@antigravity_iran)
+        </a>
+        <a href="https://t.me/+Kq4Yl6UvpqEwMDJk" target="_blank" class="btn-main btn-group">
+          💬 درخواست ورود به گروه گفت‌وگو
         </a>
       </div>
     </div>
 
   </div>
 
+  <!-- Footer -->
   <footer>
-    <p>Google Antigravity Community • میزبانی شده روی گیت‌هاب ارگانیزیشن <a href="https://github.com/Antigravity-Community" target="_blank" style="color: var(--accent); text-decoration: none;">Antigravity-Community</a></p>
+    <p>
+      Google Antigravity Persian Community • میزبانی و مدیریت توسط سازمان گیت‌هاب 
+      <a href="https://github.com/Antigravity-Community" target="_blank">Antigravity-Community</a>
+    </p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #475569;">
+      تمامی ابزارها به صورت متن‌باز تحت مجوز MIT ارائه می‌شوند.
+    </p>
   </footer>
+
 </body>
 </html>
