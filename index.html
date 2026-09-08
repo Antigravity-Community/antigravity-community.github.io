@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جامعه آنتی گرویتی | Google Antigravity Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(19, 27, 46, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent: #38bdf8;
+      --accent-grad: linear-gradient(135deg, #38bdf8, #818cf8);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Vazirmatn', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 1rem;
+      background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 60%);
+    }
+    .container {
+      max-width: 850px;
+      width: 100%;
+      text-align: center;
+      margin: auto;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.lead {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      text-align: right;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: #0088cc;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #0099e6; }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+    }
+    .btn-outline:hover { background: rgba(56, 189, 248, 0.15); }
+    .btn-github {
+      background: #24292e;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+    }
+    .btn-github:hover { background: #2f363d; }
+    footer {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">🚀 Official Persian Community</div>
+    <h1>جامعه توسعه‌دهندگان Google Antigravity</h1>
+    <p class="lead">
+      پایگاه رسمی و متن‌باز کاربران و توسعه‌دهندگان ایرانی آنتی‌گرویتی. تبادل دانش، معرفی ابزارها و توسعه پروژه‌های متن‌باز.
+    </p>
+
+    <div class="grid">
+      <!-- Channel -->
+      <div class="card">
+        <div>
+          <div class="card-icon">📢</div>
+          <h3>کانال رسمی تلگرام</h3>
+          <p>جدیدترین اخبار، آپدیت‌های آنتی‌گرویتی و معرفی ابزارهای ساخته‌شده توسط کامیونیتی.</p>
+        </div>
+        <a href="https://t.me/antigravity_iran" target="_blank" class="btn btn-primary">
+          عضویت در کانال (@antigravity_iran)
+        </a>
+      </div>
+
+      <!-- Group -->
+      <div class="card">
+        <div>
+          <div class="card-icon">💬</div>
+          <h3>گروه گفت‌وگو و پرسش‌وپاسخ</h3>
+          <p>اتاق تبادل نظر، رفع خطاهای نصب و ابزارها و گفت‌وگوی مستقیم (با تایید ادمین).</p>
+        </div>
+        <a href="https://t.me/+Kq4Yl6UvpqEwMDJk" target="_blank" class="btn btn-outline">
+          درخواست عضویت در گروه
+        </a>
+      </div>
+
+      <!-- Projects / Switcher -->
+      <div class="card">
+        <div>
+          <div class="card-icon">⚡️</div>
+          <h3>Account Switcher</h3>
+          <p>ابزار نیتیو و فوق‌سریع سوییچ بین اکانت‌های گوگل زیر ۳ ثانیه در مک و ویندوز.</p>
+        </div>
+        <a href="https://github.com/m4tinbeigi-official/antigravity-account-switcher" target="_blank" class="btn btn-github">
+          ⭐ مشاهده در گیت‌هاب
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Google Antigravity Community • تحت حمایت و میزبانی سازمان گیت‌هاب <a href="https://github.com/Antigravity-Community" target="_blank" style="color: var(--accent); text-decoration: none;">Antigravity-Community</a></p>
+  </footer>
+</body>
+</html>
