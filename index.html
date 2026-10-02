@@ -459,6 +459,148 @@
     }
     footer a:hover { text-decoration: underline; }
 
+    /* Tutorial & Guide Section */
+    .tutorial-container {
+      margin-top: 4.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 3rem 2.25rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .tutorial-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .tutorial-header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .tutorial-header h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .tutorial-header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .tutorial-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: rgba(10, 15, 26, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .step-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .step-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      color: #000;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .step-desc {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .tutorial-code-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #38bdf8;
+      direction: ltr;
+      text-align: left;
+      overflow-x: auto;
+      line-height: 1.6;
+      margin: 0.75rem 0 1rem 0;
+    }
+
+    .step-bullets {
+      list-style: none;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .step-bullets li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .highlight-pill {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.2rem; }
       .grid { grid-template-columns: 1fr; }
@@ -476,6 +618,9 @@
         <span>Antigravity Iran</span>
       </a>
       <div class="nav-links">
+        <a href="#tutorial-9router" class="nav-btn nav-btn-gh">
+          📚 آموزش ۹Router و Claude
+        </a>
         <a href="https://t.me/antigravity_iran" target="_blank" class="nav-btn nav-btn-tg">
           📢 کانال تلگرام
         </a>
@@ -517,6 +662,32 @@
     </div>
 
     <div class="grid">
+
+      <!-- Card 0: 9Router Antigravity & Claude -->
+      <div class="card" style="border-color: rgba(56, 189, 248, 0.4); background: radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.12) 0%, rgba(17, 24, 39, 0.85) 60%);">
+        <div class="card-top">
+          <div class="card-header-line">
+            <div class="card-icon-badge">🔀</div>
+            <span class="pill-tag tag-tool">رفع ریجن و اتصال Claude</span>
+          </div>
+          <h3>اتصال ۹Router به Antigravity و Claude</h3>
+          <p>
+            حل قطعی ارور ریجن ایران با لاگین مستقیم جیمیل در ۹Router لوکال و اتصال سهمیه رایگان مدل‌های Gemini و Claude به ابزار رسمی Claude Code در ترمینال.
+          </p>
+          <ul class="card-feature-list">
+            <li>بدون نیاز به تغییر کشور اکانت گوگل یا ساخت پروژه کلاد</li>
+            <li>اتصال مستقیم به Claude Code، Cursor، VS Code و Cline</li>
+            <li>دسترسی به مدل‌های ag/claude-sonnet-4-6 و ag/gemini-3.8-flash</li>
+            <li>سرور استاندارد محلی روی پورت ۲۰۱۲۸</li>
+          </ul>
+          <div class="code-snippet">npm install -g 9router &amp;&amp; 9router</div>
+        </div>
+        <div class="card-actions">
+          <a href="#tutorial-9router" class="btn-card btn-card-gh">
+            📚 مطالعه آموزش کامل و گام‌به‌گام
+          </a>
+        </div>
+      </div>
 
       <!-- Card 1: Account Switcher -->
       <div class="card">
@@ -731,6 +902,142 @@
         </div>
       </div>
     </div>
+
+    <!-- Complete 9Router & Claude Code Tutorial Section -->
+    <section id="tutorial-9router" class="tutorial-container">
+      <div class="tutorial-header">
+        <span class="highlight-pill">آموزش گام‌به‌گام و جامع</span>
+        <h2>راهنمای صفر تا صد: راه‌اندازی ۹Router، اتصال جیمیل و استفاده در Claude Code</h2>
+        <p>
+          حل قطعی مشکل ریجن ایران در استفاده از هوش مصنوعی گوگل و اتصال سهمیه رایگان مدل‌های Antigravity به ابزار خط فرمان Claude Code در ترمینال.
+        </p>
+      </div>
+
+      <div class="tutorial-steps">
+
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-number">۱</div>
+            <div class="step-title">پیش‌نیاز: نصب Node.js و npm</div>
+          </div>
+          <p class="step-desc">
+            ابزار ۹Router روی بستر نودجی‌اس اجرا می‌شود. اگر نودجی‌اس روی سیستم شما نصب نیست:
+          </p>
+          <ul class="step-bullets">
+            <li>از وب‌سایت رسمی <strong>nodejs.org</strong> آخرین نسخه پایدار (LTS) را دانلود و نصب کنید.</li>
+            <li>در مک می‌توانید با پکیج منیجر Homebrew دستور brew install node را اجرا نمایید.</li>
+          </ul>
+          <div class="tutorial-code-block">node -v
+npm -v</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-number">۲</div>
+            <div class="step-title">نصب سراسری و اجرای ۹Router</div>
+          </div>
+          <p class="step-desc">
+            ترمینال سیستم (در مک و لینوکس) یا CMD / PowerShell (در ویندوز) را باز کنید و ۹Router را به صورت سراسری نصب و اجرا نمایید:
+          </p>
+          <div class="tutorial-code-block"># نصب سراسری ۹Router
+npm install -g 9router
+
+# اجرای سرور محلی
+9router</div>
+          <p class="step-desc" style="margin-top: 0.5rem; margin-bottom: 0;">
+            با اجرای این دستور، سرور پروکسی محلی روی پورت <strong>20128</strong> سیستم شما فعال شده و آماده اتصال می‌گردد.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-number">۳</div>
+            <div class="step-title">لاگین اکانت جیمیل در Antigravity (حل مشکل ریجن)</div>
+          </div>
+          <p class="step-desc">
+            برای دور زدن محدودیت ریجن نیازی به تغییر کشور اکانت گوگل یا ساخت پروژه در گوگل کلاد نیست؛ ۹Router پروتکل احراز هویت را شبیه‌سازی کرده و سهمیه رسمی را فعال می‌کند:
+          </p>
+          <ul class="step-bullets">
+            <li>در مرورگر خود آدرس <strong>http://localhost:20128</strong> را باز کنید.</li>
+            <li>از منوی سمت چپ (Sidebar)، وارد بخش <strong>Providers</strong> شوید.</li>
+            <li>کارت <strong>Antigravity</strong> (آیکون موشک نارنجی) را پیدا کرده و روی آن کلیک کنید.</li>
+            <li>روی دکمه <strong>+ Add Account</strong> یا <strong>Login with Google</strong> بزنید.</li>
+            <li>در تب رسمی باز شده از گوگل، جیمیل خود را انتخاب و پسورد را وارد کنید.</li>
+            <li>در صفحه مجوزها، دکمه <strong>Allow</strong> (تایید / ادامه) را بزنید تا توکن ذخیره شود.</li>
+          </ul>
+          <p class="step-desc" style="margin-top: 0.5rem; margin-bottom: 0;">
+            پس از تایید، به طور خودکار به پنل ۹Router هدایت می‌شوید و وضعیت اکانت شما در وضعیت فعال (Active) قرار می‌گیرد.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-number">۴</div>
+            <div class="step-title">دریافت کلید API از پنل ۹Router</div>
+          </div>
+          <p class="step-desc">
+            برای اتصال کلاینت‌ها و ادیتورها به ۹Router نیاز به یک کلید احراز هویت محلی دارید:
+          </p>
+          <ul class="step-bullets">
+            <li>در پنل وب وارد مسیر <strong>Settings > API Keys</strong> شوید (آدرس: http://localhost:20128/dashboard/settings).</li>
+            <li>روی دکمه <strong>Create API Key</strong> بزنید یا کلید از پیش ساخته‌شده پیش‌فرض (با شروع sk-...) را کپی کنید.</li>
+          </ul>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-number">۵</div>
+            <div class="step-title">اتصال مدل‌های Antigravity به Claude Code</div>
+          </div>
+          <p class="step-desc">
+            برای اینکه دستور رسمی claude در ترمینال، تمامی درخواست‌ها را به جای سرورهای پولی Anthropic از ۹Router و سهمیه رایگان جیمیل شما ارسال کند:
+          </p>
+          <p class="step-desc"><strong>روش اول (تنظیم مستقیم فایل کانفیگ شل):</strong> فایل پروفایل شل سیستم خود را باز کنید (در مک ~/.zshrc و در لینوکس یا ویندوز ~/.bashrc) و خطوط زیر را به انتهای آن بیفزایید:</p>
+          <div class="tutorial-code-block"># هدایت کلاینت کلود به 9Router لوکال
+export ANTHROPIC_BASE_URL="http://localhost:20128"
+export ANTHROPIC_AUTH_TOKEN="کلید_API_کپی_شده_از_مرحله_قبل"
+
+# تنظیم مدل‌های پیش‌فرض روی سهمیه آنتی‌گرویتی
+export ANTHROPIC_DEFAULT_SONNET_MODEL="ag/claude-sonnet-4-6"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="ag/claude-sonnet-4-6"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="ag/gemini-3.8-flash-medium"
+export API_TIMEOUT_MS="600000"</div>
+          <p class="step-desc">سپس در ترمینال دستور source ~/.zshrc (یا source ~/.bashrc) را بزنید تا تغییرات اعمال شود.</p>
+          <p class="step-desc" style="margin-top: 1rem;"><strong>روش دوم (تنظیم خودکار از منوی ترمینالی ۹Router):</strong> اگر دستور 9router در ترمینال باز است، وارد منوی <strong>CLI Tools > Claude Code</strong> شوید، گزینه <strong>⚡ Quick Setup</strong> را انتخاب کنید و مدل Sonnet را روی <strong>ag/claude-sonnet-4-6</strong> بگذارید.</p>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-number">۶</div>
+            <div class="step-title">تست نهایی در ترمینال و مدل‌های در دسترس</div>
+          </div>
+          <p class="step-desc">
+            حالا در هر پروژه‌ای در ترمینال، دستور claude را اجرا کنید یا یک دستور مستقیم بفرستید:
+          </p>
+          <div class="tutorial-code-block"># اجرای محیط تعاملی کلود
+claude
+
+# یا ارسال پرامپت تستی مستقیم
+claude "سلام، مدل فعلی شما چیست؟"</div>
+          <p class="step-desc"><strong>مدل‌های فعال آنتی‌گرویتی در ۹Router:</strong></p>
+          <ul class="step-bullets">
+            <li><strong>ag/claude-sonnet-4-6 :</strong> مدل قدرتمند و محبوب Claude Sonnet با تفکر عمیق (Thinking) بدون نیاز به هزینه اشتراک</li>
+            <li><strong>ag/gemini-3.8-flash-medium :</strong> سریع‌ترین و بهینه‌ترین نسخه Gemini برای پرسش و پاسخ‌های روزمره</li>
+            <li><strong>ag/gemini-pro-agent :</strong> مدل Gemini 3.1 Pro Agentic برای کدنویسی‌های پیچیده و مهندسی پروژه</li>
+          </ul>
+          <p class="step-desc" style="margin-top: 0.75rem;">
+            همچنین می‌توانید از همین اندپوینت در افزونه‌های VS Code، ادیتور Cursor، Roo Code و Cline با Base URL برابر با <strong>http://localhost:20128/v1</strong> و مدل‌های فوق استفاده کنید.
+          </p>
+        </div>
+
+      </div>
+    </section>
 
     <!-- Community CTA Box -->
     <div class="community-banner">
