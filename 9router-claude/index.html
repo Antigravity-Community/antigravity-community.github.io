@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>آموزش جامع راه‌اندازی ۹Router، فعال‌سازی Antigravity با جیمیل و اتصال به Claude Code | جامعه آنتی‌گرویتی</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="آموزش جامع راه‌اندازی ۹Router، فعال‌سازی Antigravity با جیمیل و اتصال به Claude Code">
+  <meta name="description" content="راهنمای صفر تا صد رفع خطای ریجن گوگل با ۹Router لوکال، اتصال جیمیل به سهمیه رایگان Antigravity و اجرای مدل‌های کلود و جمنای در Claude Code ترمینال.">
+  <meta name="keywords" content="9Router, Antigravity, Claude Code, Gemini 3.8, Claude Sonnet 4.6, رفع تحریم هوش مصنوعی, آنتی گرویتی">
+  <meta name="author" content="Antigravity Community">
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antigravity-community.github.io/9router-claude/">
+  <meta property="og:title" content="آموزش جامع راه‌اندازی ۹Router، فعال‌سازی Antigravity با جیمیل و اتصال به Claude Code">
+  <meta property="og:description" content="راهنمای صفر تا صد رفع خطای ریجن گوگل با ۹Router لوکال، اتصال جیمیل به سهمیه رایگان Antigravity و اجرای مدل‌های کلود و جمنای در Claude Code ترمینال.">
+  <meta property="og:image" content="https://antigravity-community.github.io/og-image.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-surface: #0e131f;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #38bdf8;
+      --accent-secondary: #818cf8;
+      --accent-emerald: #34d399;
+      --accent-gold: #fbbf24;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #64748b;
+      --code-bg: #05070b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.8;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 50% -10%, rgba(56, 189, 248, 0.15) 0%, transparent 55%),
+        radial-gradient(circle at 90% 40%, rgba(129, 140, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 10% 80%, rgba(52, 211, 153, 0.05) 0%, transparent 45%);
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .brand-logo .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-back {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f1f5f9;
+      border: 1px solid var(--card-border);
+    }
+    .nav-btn-back:hover { background: rgba(255, 255, 255, 0.12); }
+
+    .nav-btn-tg {
+      background: #0088cc;
+      color: #fff;
+    }
+    .nav-btn-tg:hover { background: #0099e6; }
+
+    /* Article Container */
+    .article-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem 1.5rem;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumbs a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .breadcrumbs a:hover { text-decoration: underline; }
+
+    /* Header */
+    .article-header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 2rem;
+    }
+
+    .article-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .article-header h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      flex-wrap: wrap;
+    }
+
+    /* Table of contents box */
+    .toc-box {
+      background: rgba(14, 19, 31, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .toc-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .toc-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc-list a:hover {
+      color: var(--accent);
+    }
+
+    /* Content styling */
+    .article-body h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 3rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 0.5rem;
+    }
+
+    .article-body h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-body p {
+      color: #cbd5e1;
+      font-size: 1.02rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.85;
+    }
+
+    .article-body ul, .article-body ol {
+      margin-bottom: 1.5rem;
+      padding-right: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    .article-body li {
+      margin-bottom: 0.6rem;
+      line-height: 1.75;
+    }
+
+    /* Note and tip callouts */
+    .callout {
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+      border: 1px solid;
+    }
+
+    .callout-info {
+      background: rgba(56, 189, 248, 0.06);
+      border-color: rgba(56, 189, 248, 0.25);
+    }
+    .callout-info h4 {
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .callout-success {
+      background: rgba(52, 211, 153, 0.06);
+      border-color: rgba(52, 211, 153, 0.25);
+    }
+    .callout-success h4 {
+      color: var(--accent-emerald);
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Code blocks */
+    .code-wrapper {
+      position: relative;
+      margin: 1.25rem 0 1.75rem 0;
+    }
+
+    .code-header {
+      background: #0b0f17;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      direction: ltr;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .copy-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+    }
+
+    pre code {
+      display: block;
+      background: var(--code-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0 0 12px 12px;
+      padding: 1.1rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #38bdf8;
+      direction: ltr;
+      text-align: left;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    /* Model comparison table */
+    .table-container {
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(14, 19, 31, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      padding: 0.9rem 1.2rem;
+      text-align: right;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    td code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      direction: ltr;
+      display: inline-block;
+    }
+
+    /* Community Banner */
+    .article-cta {
+      margin-top: 4rem;
+      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(14, 19, 31, 0.95) 75%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .article-cta h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-cta p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+    .btn-cta-tg { background: #0088cc; color: #fff; }
+    .btn-cta-tg:hover { background: #0099e6; transform: translateY(-1px); }
+
+    .btn-cta-group {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+    }
+    .btn-cta-group:hover { background: rgba(56, 189, 248, 0.12); transform: translateY(-1px); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 0.88rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .article-header h1 { font-size: 1.7rem; }
+      .nav-container { flex-direction: column; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav>
+    <div class="nav-container">
+      <a href="../" class="brand-logo">
+        <div class="logo-icon">🚀</div>
+        <span>Antigravity Iran</span>
+      </a>
+      <div class="nav-links">
+        <a href="../" class="nav-btn nav-btn-back">
+          🏠 بازگشت به صفحه اصلی
+        </a>
+        <a href="https://t.me/antigravity_iran" target="_blank" class="nav-btn nav-btn-tg">
+          📢 کانال تلگرام
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-container">
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <a href="../">صفحه اصلی</a>
+      <span>›</span>
+      <span>مقالات و راهنماها</span>
+      <span>›</span>
+      <span>آموزش ۹Router و Claude</span>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <div class="article-badge">⚡ راهنمای کاربردی و تخصصی</div>
+      <h1>آموزش جامع: نصب ۹Router، فعال‌سازی Antigravity با جیمیل و اتصال به Claude Code</h1>
+      <div class="article-meta">
+        <span>✍️ تحریریه جامعه آنتی‌گرویتی ایران</span>
+        <span>⏱ زمان مطالعه: ۵ دقیقه</span>
+        <span>📅 به‌روزرسانی: اکتبر ۲۰۲۶</span>
+      </div>
+    </header>
+
+    <!-- Table of Contents -->
+    <div class="toc-box">
+      <div class="toc-title">📌 سرفصل‌های این مقاله</div>
+      <div class="toc-list">
+        <a href="#why-this-method">۱. چرا این روش مشکل ریجن را حل می‌کند؟</a>
+        <a href="#step-1-prerequisites">۲. مرحله اول: پیش‌نیاز و نصب Node.js</a>
+        <a href="#step-2-install-9router">۳. مرحله دوم: نصب و اجرای ۹Router روی سیستم</a>
+        <a href="#step-3-login-gmail">۴. مرحله سوم: لاگین اکانت جیمیل در Antigravity</a>
+        <a href="#step-4-api-key">۵. مرحله چهارم: ساخت و کپی کلید API</a>
+        <a href="#step-5-claude-setup">۶. مرحله پنجم: اتصال به Claude Code در ترمینال</a>
+        <a href="#step-6-available-models">۷. مرحله ششم: مدل‌های فعال و تست نهایی</a>
+        <a href="#faq-troubleshooting">۸. عیب‌یابی و نکات تکمیلی</a>
+      </div>
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+
+      <section id="why-this-method">
+        <h2>💡 چرا این روش مشکل ریجن را حل می‌کند؟</h2>
+        <p>
+          کاربران ایرانی هنگام استفاده از سرویس‌های کدنویسی و مدل‌های هوش مصنوعی گوگل معمولاً با خطاهایی مثل 
+          <code dir="ltr">Location not supported</code> یا خطای احراز هویت ریجن مواجه می‌شوند. این خطا ناشی از تنظیمات کشور ثبت‌شده روی اکانت است و تغییر پروفایل مالی در گوگل پیمنت نیز در بسیاری از مواقع آن را حل نمی‌کند.
+        </p>
+        <div class="callout callout-success">
+          <h4>چرا نیازی به تغییر ریجن یا گوگل کلاد نیست؟</h4>
+          <p style="margin-bottom: 0;">
+            ابزار متن‌باز <strong>9Router</strong> پروتکل ارتباطی رسمی Antigravity را روی لوکال‌هاست شبیه‌سازی می‌کند. زمانی که شما از داخل پنل ۹Router وارد جیمیل خود می‌شوید، توکن‌های معتبر صادر شده و سهمیه رسمی مدل‌های Gemini و Claude مستقیماً به سیستم شما متصل می‌شود، بدون اینکه لایه‌های سخت‌گیرانه ریجن اکانت مانع اتصال شوند.
+          </p>
+        </div>
+      </section>
+
+      <section id="step-1-prerequisites">
+        <h2>۱. مرحله اول: پیش‌نیاز و نصب Node.js</h2>
+        <p>
+          برای اجرای ۹Router در سیستم، به بستر Node.js (نسخه ۱۸ یا بالاتر) نیاز دارید. اگر از قبل نودجی‌اس را نصب دارید، می‌توانید از این مرحله عبور کنید.
+        </p>
+        <ul>
+          <li><strong>ویندوز و لینوکس:</strong> وارد وب‌سایت رسمی <a href="https://nodejs.org" target="_blank" style="color: var(--accent);">nodejs.org</a> شوید و نسخه LTS را دانلود و نصب کنید.</li>
+          <li><strong>مک (macOS):</strong> با دستور <code dir="ltr">brew install node</code> در ترمینال یا دانلود مستقیم فایل نصب از سایت رسمی.</li>
+        </ul>
+        <p>برای اطمینان از نصب بودن نودجی‌اس، دستور زیر را در ترمینال یا CMD وارد کنید:</p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Terminal / CMD</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>node -v
+npm -v</code></pre>
+        </div>
+      </section>
+
+      <section id="step-2-install-9router">
+        <h2>۲. مرحله دوم: نصب و اجرای ۹Router روی سیستم</h2>
+        <p>
+          ترمینال سیستم خود را باز کرده و با استفاده از دستور زیر، بسته ۹Router را به صورت سراسری (Global) روی سیستم نصب کنید:
+        </p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Install 9Router</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>npm install -g 9router</code></pre>
+        </div>
+
+        <p>پس از پایان نصب، برای روشن کردن سرور لوکال کافیست دستور زیر را اجرا کنید:</p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Start Server</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>9router</code></pre>
+        </div>
+
+        <p>
+          با این کار، سرور پروکسی ۹Router روی پورت محلی <strong>20128</strong> آماده به کار می‌شود و در خروجی ترمینال آدرس پنل به شما نمایش داده می‌شود.
+        </p>
+      </section>
+
+      <section id="step-3-login-gmail">
+        <h2>۳. مرحله سوم: لاگین اکانت جیمیل در Antigravity</h2>
+        <p>
+          این مهم‌ترین بخش برای دریافت سهمیه و خنثی کردن خطای ریجن است. مراحل زیر را با دقت انجام دهید:
+        </p>
+        <ol>
+          <li>مرورگر سیستم خود را باز کرده و وارد آدرس <strong>http://localhost:20128</strong> شوید.</li>
+          <li>از منوی کناری سمت چپ، روی گزینه <strong>Providers</strong> کلیک کنید (آدرس مستقیم: <code dir="ltr">http://localhost:20128/dashboard/providers</code>).</li>
+          <li>کارت <strong>Antigravity</strong> (دارای آیکون موشک نارنجی) را پیدا کرده و روی آن کلیک کنید تا وارد صفحه تنظیمات آن شوید.</li>
+          <li>روی دکمه آبی‌رنگ <strong>+ Add Account</strong> یا <strong>Login with Google</strong> کلیک کنید.</li>
+          <li>یک تب جدید از صفحه رسمی ورود گوگل باز می‌شود. جیمیل شخصی خود را انتخاب کرده و رمز عبور را وارد نمایید.</li>
+          <li>در صفحه درخواست دسترسی‌ها (Permissions)، روی دکمه <strong>Allow</strong> (تایید و ادامه) کلیک کنید.</li>
+        </ol>
+        <div class="callout callout-info">
+          <h4>نتیجه موفقیت‌آمیز</h4>
+          <p style="margin-bottom: 0;">
+            پس از تایید دسترسی، به طور خودکار به پنل ۹Router بازمی‌گردید. اکنون نام و آدرس جیمیل شما در لیست اکانت‌ها با وضعیت <strong>Active</strong> (سبز رنگ) درج شده است.
+          </p>
+        </div>
+      </section>
+
+      <section id="step-4-api-key">
+        <h2>۴. مرحله چهارم: ساخت و کپی کلید API</h2>
+        <p>
+          برای اینکه کلاینت‌های خارجی (مانند ابزار Claude Code یا ادیتورها) اجازه اتصال به سرور ۹Router را داشته باشند، به یک کلید API محلی نیاز است:
+        </p>
+        <ul>
+          <li>در پنل وب ۹Router وارد مسیر <strong>Settings > API Keys</strong> شوید.</li>
+          <li>می‌توانید کلید از پیش ساخته‌شده پیش‌فرض (که با <code dir="ltr">sk-...</code> شروع می‌شود) را کپی کنید یا با دکمه <strong>Create API Key</strong> یک کلید اختصاصی بسازید.</li>
+        </ul>
+      </section>
+
+      <section id="step-5-claude-setup">
+        <h2>۵. مرحله پنجم: اتصال به Claude Code در ترمینال</h2>
+        <p>
+          حالا می‌خواهیم ابزار رسمی و محبوب <strong>Claude Code</strong> در ترمینال، به جای سرورهای پولی Anthropic از ۹Router و سهمیه فعال‌شده اکانت جیمیل شما استفاده کند. برای این کار دو راه وجود دارد:
+        </p>
+
+        <h3>روش اول: تنظیم پایدار در فایل شل (پیشنهاد جامعه)</h3>
+        <p>
+          فایل پروفایل ترمینال سیستم خود را باز کنید (در مک فایل <code dir="ltr">~/.zshrc</code> و در لینوکس یا ویندوز فایل <code dir="ltr">~/.bashrc</code>):
+        </p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>nano ~/.zshrc</code></pre>
+        </div>
+
+        <p>چهار خط زیر را به انتهای فایل اضافه کرده و ذخیره نمایید (به جای مقدار کلید، API Key مرحله ۴ را بگذارید):</p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>~/.zshrc</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code># هدایت ترافیک Claude Code به سرور 9Router محلی
+export ANTHROPIC_BASE_URL="http://localhost:20128"
+export ANTHROPIC_AUTH_TOKEN="کلید_API_شما"
+
+# تنظیم مدل‌های پیش‌فرض روی سهمیه رایگان آنتی‌گرویتی
+export ANTHROPIC_DEFAULT_SONNET_MODEL="ag/claude-sonnet-4-6"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="ag/claude-sonnet-4-6"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="ag/gemini-3.8-flash-medium"
+export API_TIMEOUT_MS="600000"</code></pre>
+        </div>
+
+        <p>سپس برای اعمال تغییرات در ترمینال جاری دستور زیر را بزنید:</p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Reload Shell</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>source ~/.zshrc</code></pre>
+        </div>
+
+        <h3>روش دوم: تنظیم خودکار از منوی ترمینالی ۹Router</h3>
+        <p>
+          اگر دستور <code dir="ltr">9router</code> را در حالت منوی تعاملی باز کرده‌اید، می‌توانید وارد مسیر <strong>CLI Tools > Claude Code</strong> شوید، گزینه <strong>⚡ Quick Setup</strong> را بزنید و مدل Sonnet را روی <code dir="ltr">ag/claude-sonnet-4-6</code> تنظیم نمایید.
+        </p>
+      </section>
+
+      <section id="step-6-available-models">
+        <h2>۶. مرحله ششم: مدل‌های فعال و تست نهایی</h2>
+        <p>
+          اکنون همه چیز آماده است! وارد هر پوشه پروژه‌ای که می‌خواهید بشوید و دستور رسمی کلود را اجرا کنید:
+        </p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Run Claude Code</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>claude</code></pre>
+        </div>
+
+        <p>همچنین برای یک تست سریع و دریافت پاسخ مستقیم می‌توانید دستور زیر را اجرا کنید:</p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Quick Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>claude "سلام! مدل فعال و وضعیت سیستم را به صورت خلاصه بگو."</code></pre>
+        </div>
+
+        <h3>جدول مدل‌های فعال آنتی‌گرویتی در ۹Router</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>نام مدل در ۹Router</th>
+                <th>مدل واقعی</th>
+                <th>کاربرد و ویژگی</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ag/claude-sonnet-4-6</code></td>
+                <td>Claude 3.7 / Sonnet Thinking</td>
+                <td>قدرتمندترین مدل کدنویسی با استدلال عمیق، بدون هزینه اشتراک</td>
+              </tr>
+              <tr>
+                <td><code>ag/gemini-3.8-flash-medium</code></td>
+                <td>Gemini 2.5/3 Flash</td>
+                <td>فوق‌العاده سریع و کم‌مصرف برای سوالات و تسک‌های روزمره</td>
+              </tr>
+              <tr>
+                <td><code>ag/gemini-pro-agent</code></td>
+                <td>Gemini 3.1 Pro Agentic</td>
+                <td>مدل مناسب برای وظایف چندمرحله‌ای و معماری پروژه</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <h4>استفاده در ادیتورهای دیگر (Cursor / Roo Code / Cline / VS Code)</h4>
+          <p style="margin-bottom: 0;">
+            علاوه بر Claude Code، می‌توانید در هر ادیتوری ارائه‌دهنده را روی <strong>OpenAI Compatible</strong> قرار دهید، مقدار <strong>Base URL</strong> را برابر با <code dir="ltr">http://localhost:20128/v1</code> بگذارید و یکی از مدل‌های جدول بالا را انتخاب کنید.
+          </p>
+        </div>
+      </section>
+
+      <section id="faq-troubleshooting">
+        <h2>۷. عیب‌یابی و نکات تکمیلی</h2>
+        
+        <h3>۱. خطای پورت در حال استفاده (Port 20128 in use)</h3>
+        <p>
+          اگر ۹Router از قبل در پس‌زمینه در حال اجرا باشد، پورت اشغال است. در مک یا لینوکس می‌توانید با دستور زیر پروسس قبلی را ری‌استارت کنید:
+        </p>
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>Restart 9Router</span>
+            <button class="copy-btn" onclick="copyCode(this)">کپی</button>
+          </div>
+          <pre><code>pkill -f 9router || true
+9router</code></pre>
+        </div>
+
+        <h3>۲. اتصال چند اکانت برای سهمیه بیشتر (Account Pool)</h3>
+        <p>
+          شما می‌توانید در همان صفحه Providers > Antigravity چندین جیمیل مختلف را متصل کنید. ۹Router به صورت خودکار ترافیک را بین اکانت‌های شما تقسیم (Load Balance) می‌کند تا هیچ‌وقت با ریت‌لیمیت مواجه نشوید.
+        </p>
+      </section>
+
+    </article>
+
+    <!-- Community CTA Box -->
+    <div class="article-cta">
+      <h3>🚀 به جامعه توسعه‌دهندگان آنتی‌گرویتی بپیوندید</h3>
+      <p>
+        تجربه‌ها، ابزارها و سوالات فنی خود را در جمع صمیمی برنامه‌نویسان مطرح کنید.
+      </p>
+      <div class="cta-actions">
+        <a href="https://t.me/antigravity_iran" target="_blank" class="btn-cta btn-cta-tg">
+          📢 عضویت در کانال (@antigravity_iran)
+        </a>
+        <a href="https://t.me/+Kq4Yl6UvpqEwMDJk" target="_blank" class="btn-cta btn-cta-group">
+          💬 درخواست عضویت در گروه گفت‌وگو
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Google Antigravity Persian Community • میزبانی و مدیریت توسط 
+      <a href="https://github.com/Antigravity-Community" target="_blank">Antigravity-Community</a>
+    </p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #475569;">
+      تمامی ابزارها و راهنماها به صورت متن‌باز منتشر می‌شوند.
+    </p>
+  </footer>
+
+  <script>
+    function copyCode(btn) {
+      const code = btn.parentElement.nextElementSibling.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = 'کپی شد!';
+        btn.style.color = '#34d399';
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
